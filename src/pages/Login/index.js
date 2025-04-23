@@ -29,7 +29,9 @@ export default function Login() {
     }
 
     if (!formErrors) {
+      setIsloading(true);
       dispatch(actions.loginRequest({ email, password }));
+      setIsloading(false);
       history.push('/Dashboard');
     }
   }

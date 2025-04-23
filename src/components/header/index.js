@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaAngleLeft } from 'react-icons/fa6';
+import { CgLogOut } from 'react-icons/cg';
 
 import { Head, Container, MenuNavigation, Navigate, ItemsNav, Overlay, ItemAdm } from './styled';
 
@@ -88,10 +89,9 @@ export default function Header() {
           </ItemsNav>
         </Navigate>
         <ItemAdm>
-          <img src={iconAdm} alt="" />
+          <CgLogOut />
           <div onClick={handleLogout}>
-            <p>Centro de Inclusão</p>
-            <p>Administrador</p>
+            <p>Sair</p>
           </div>
         </ItemAdm>
       </MenuNavigation>

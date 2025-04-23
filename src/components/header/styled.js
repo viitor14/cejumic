@@ -18,7 +18,7 @@ export const MenuNavigation = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
+  height: 90vh;
   background: #fff;
   transition: width 0.3s ease-in-out;
   z-index: 1000;
@@ -87,12 +87,6 @@ export const ItemAdm = styled.div`
   p:first-child {
     font-size: 12px;
     font-weight: 600;
-  }
-
-  p:last-child {
-    font-size: 10px;
-    font-weight: 400;
-    color: rgba(114, 114, 120, 1);
   }
 `;
 

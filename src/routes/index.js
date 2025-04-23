@@ -12,6 +12,7 @@ import Volunteers from '../pages/Volunteers';
 import NewBenefiaciary from '../pages/NewBeneficiary';
 import NewDonations from '../pages/NewDonations';
 import NewVolunteers from '../pages/NewVolunteers';
+import Report from '../pages/Report';
 
 export default function Routes() {
   return (
@@ -24,6 +25,7 @@ export default function Routes() {
       <MyRoute exact path="/NovoBeneficiário" component={NewBenefiaciary} isClosed={true} />
       <MyRoute exact path="/NovaDoação" component={NewDonations} isClosed={true} />
       <MyRoute exact path="/NovoVoluntário" component={NewVolunteers} isClosed={true} />
+      <MyRoute exact path="/Relatório" component={Report} isClosed={true} />
       \\Para rendizarar uma rota. EXACT para rendizarar a rota com caminho especifico
       <MyRoute path="*" component={() => <Redirect to="/Dashboard" />} />
       \\Qualquer rota que não existir/configurada vai cair numa pagina de erro
