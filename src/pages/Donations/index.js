@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 
 import axios from '../../services/axios';
 
+import Loading from '../../components/loading';
 import DataTable from '../../components/tableData';
 import BoxIntroduction from '../../components/introduction';
 
@@ -13,6 +14,7 @@ import IconDonations from './assets/images/icon-doacao.png';
 export default function PageDonations() {
   const [dados, setDados] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const columns = [
     {
@@ -45,32 +47,37 @@ export default function PageDonations() {
 
   useEffect(() => {
     async function getData() {
+      setIsLoading(true);
       const response = await axios.get('/doacao');
       setDados(response.data);
+      setIsLoading(false);
     }
 
     getData();
   }, []);
 
   return (
-    <PageBackground>
-      <DivMain>
-        <SectionMain>
-          <div>
-            <BoxIntroduction
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-              icon={IconDonations}
-              alt="Icone de doação"
-              title="Doações"
-              text="Gerenciamento de doações recebidas"
-              textButtonTop="Nova Doação"
-              linkButtonAdd="/NovaDoação"
-            />
-          </div>
-          <DataTable columns={columns} data={filteredData} />
-        </SectionMain>
-      </DivMain>
-    </PageBackground>
+    <>
+      <Loading isLoading={isLoading} />
+      <PageBackground>
+        <DivMain>
+          <SectionMain>
+            <div>
+              <BoxIntroduction
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                icon={IconDonations}
+                alt="Icone de doação"
+                title="Doações"
+                text="Gerenciamento de doações recebidas"
+                textButtonTop="Nova Doação"
+                linkButtonAdd="/NovaDoação"
+              />
+            </div>
+            <DataTable columns={columns} data={filteredData} />
+          </SectionMain>
+        </DivMain>
+      </PageBackground>
+    </>
   );
 }

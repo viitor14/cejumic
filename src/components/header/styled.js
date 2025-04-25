@@ -18,7 +18,7 @@ export const MenuNavigation = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 90vh;
+  height: 100vh;
   background: #fff;
   transition: width 0.3s ease-in-out;
   z-index: 1000;

@@ -189,13 +189,14 @@ export default function PageDashboard() {
                   : '#00c853' // verde
               }
             />
-
-            <BoxContent
+            {/*
+              <BoxContent
               title="Projetos Ativos"
               value="8"
               percentage="+25%"
               icon="../../assets/images/icon-projetos.png"
-            />
+              />
+              */}
           </SectionMain>
         </DivMain>
       </PageBackground>

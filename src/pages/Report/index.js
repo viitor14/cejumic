@@ -20,7 +20,6 @@ export default function Report() {
       const response = await axios.get('/relatorio');
       setRelatorio(response.data.resposta);
       setIsloading(false);
-      console.log(response.data.resposta);
     } catch (error) {
       setIsloading(false);
       console.log(error);

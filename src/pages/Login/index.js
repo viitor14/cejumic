@@ -1,20 +1,23 @@
 import { React, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
-import { PageBackground, SectionMain, DivMain, Container } from '../../styles/GlobalStyles';
-import history from '../../services/history';
 import Loading from '../../components/loading';
+
 import { Box, DivLogin } from './styled';
-import * as actions from '../../store/modules/auth/actions';
+import { PageBackground, SectionMain, DivMain, Container } from '../../styles/GlobalStyles';
 
 import Logo from './assets/images/filter (1).png';
-import { toast } from 'react-toastify';
+
+import history from '../../services/history';
+import * as actions from '../../store/modules/auth/actions';
 
 export default function Login() {
   const dispatch = useDispatch();
   //dispatch - usadora para disparar ações
   //ação - descrever para redux o que deve fazer
-  const [isLoading, setIsloading] = useState(false);
+
+  const isLoading = useSelector((state) => state.auth.isLoading);
   const [email, setEmail] = useState('');
   const [password, setSenha] = useState('');
 
@@ -29,10 +32,7 @@ export default function Login() {
     }
 
     if (!formErrors) {
-      setIsloading(true);
       dispatch(actions.loginRequest({ email, password }));
-      setIsloading(false);
-      history.push('/Dashboard');
     }
   }
   return (

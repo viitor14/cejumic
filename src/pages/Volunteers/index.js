@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 
 import axios from '../../services/axios';
 
+import Loading from '../../components/loading';
 import DataTable from '../../components/tableData';
 import BoxIntroduction from '../../components/introduction';
 
@@ -15,6 +16,7 @@ import { format } from 'prettier';
 export default function PageVolunteers() {
   const [searchTerm, setSearchTerm] = useState('');
   const [dados, setDados] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const columns = [
     {
@@ -43,30 +45,35 @@ export default function PageVolunteers() {
 
   useEffect(() => {
     async function getData() {
+      setIsLoading(true);
       const response = await axios.get('/voluntario');
       setDados(response.data);
+      setIsLoading(false);
     }
 
     getData();
   }, []);
 
   return (
-    <PageBackground>
-      <DivMain>
-        <SectionMain>
-          <BoxIntroduction
-            icon={iconVolunteers}
-            alt="Icone de voluntário"
-            title="Voluntários"
-            text="Gerenciamento de voluntários"
-            textButtonTop="Novo Voluntário"
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            linkButtonAdd="/NovoVoluntário"
-          />
-          <DataTable columns={columns} data={filteredData} />
-        </SectionMain>
-      </DivMain>
-    </PageBackground>
+    <>
+      <Loading isLoading={isLoading} />
+      <PageBackground>
+        <DivMain>
+          <SectionMain>
+            <BoxIntroduction
+              icon={iconVolunteers}
+              alt="Icone de voluntário"
+              title="Voluntários"
+              text="Gerenciamento de voluntários"
+              textButtonTop="Novo Voluntário"
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              linkButtonAdd="/NovoVoluntário"
+            />
+            <DataTable columns={columns} data={filteredData} />
+          </SectionMain>
+        </DivMain>
+      </PageBackground>
+    </>
   );
 }

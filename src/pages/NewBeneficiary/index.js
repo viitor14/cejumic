@@ -66,13 +66,12 @@ export default function PageNewBeneficiary() {
           observacoes
         });
         toast.success('Formulario enviado');
+        history.goBack();
       } catch (e) {
         const errors = get(e, 'response.data.errors', []);
         const status = get(e, 'response.status', 0);
         toast.error(errors[0]);
       }
-
-      history.goBack();
     }
   };
   return (

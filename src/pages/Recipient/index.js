@@ -22,6 +22,7 @@ import { PageBackground, DivMain, SectionMain } from '../../styles/GlobalStyles'
 
 import iconRecipient from './assets/images/icon-beneficiario.png';
 import './teste.css';
+import Loading from '../../components/loading';
 export default function Recipient() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [open, setOpen] = useState(false);
@@ -29,6 +30,7 @@ export default function Recipient() {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [filterStatus, setFilterStatus] = useState('');
   const [dados, setDados] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const columns = [
     {
@@ -68,8 +70,10 @@ export default function Recipient() {
 
   const getData = async () => {
     try {
-      const response = await axios.get('/beneficiario');
+      setIsLoading(true);
+      const response = await axios.get('/beneficiario/all');
       setDados(response.data);
+      setIsLoading(false);
     } catch (error) {
       console.error('Erro ao buscar beneficiários:', error);
     }
@@ -90,30 +94,33 @@ export default function Recipient() {
   const [tipo_doacao, setTipoDoacao] = useState('');
 
   return (
-    <PageBackground>
-      <DivMain>
-        <SectionMain>
-          <div>
-            <BoxIntroduction
-              icon={iconRecipient}
-              alt="Icone Beneficiario"
-              title="Beneficiario"
-              text="Gerenciamento de beneficiários do CEJUMIC"
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-              linkButtonAdd="/NovoBeneficiário"
-              setFilterStatus={setFilterStatus}
+    <>
+      <Loading isLoading={isLoading} />
+      <PageBackground>
+        <DivMain>
+          <SectionMain>
+            <div>
+              <BoxIntroduction
+                icon={iconRecipient}
+                alt="Icone Beneficiario"
+                title="Beneficiario"
+                text="Gerenciamento de beneficiários do CEJUMIC"
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                linkButtonAdd="/NovoBeneficiário"
+                setFilterStatus={setFilterStatus}
+              />
+            </div>
+            <DataTable columns={columns} data={filteredData} />
+            <DialogBeneficiario
+              open={open}
+              setOpen={setOpen}
+              selectedItem={selectedItem}
+              atualizarDados={getData}
             />
-          </div>
-          <DataTable columns={columns} data={filteredData} />
-          <DialogBeneficiario
-            open={open}
-            setOpen={setOpen}
-            selectedItem={selectedItem}
-            atualizarDados={getData}
-          />
-        </SectionMain>
-      </DivMain>
-    </PageBackground>
+          </SectionMain>
+        </DivMain>
+      </PageBackground>
+    </>
   );
 }

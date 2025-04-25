@@ -43,7 +43,7 @@ export default function Header() {
       {/*Menu de navegação */}
       {isMenuOpen && <Overlay onClick={toggleMenu} />}
       <MenuNavigation
-        style={{ width: isMenuOpen ? '80vw' : '0', overflow: isMenuOpen ? 'visible' : 'hidden' }}>
+        style={{ width: isMenuOpen ? '60vw' : '0', overflow: isMenuOpen ? 'visible' : 'hidden' }}>
         {/*Menu de navegação */}
 
         <Navigate>
