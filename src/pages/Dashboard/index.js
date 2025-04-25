@@ -18,7 +18,8 @@ export default function PageDashboard() {
   //useEffect para calcular total de beneficiario e porcentagem por mês
   useEffect(() => {
     async function getBeneficiario() {
-      const response = await axios.get('/beneficiario');
+      const response = await axios.get('/beneficiario/ativo');
+
       const beneficiarios = response.data;
 
       const total = beneficiarios.length;
