@@ -80,12 +80,14 @@ export default function Header() {
                 Voluntários
               </Link>
             </div>
-            <div className="itemsNav">
-              <img src={iconRelatorio} alt="" />
-              <Link to="/Relatório" onClick={closeMenu}>
-                Relatórios
-              </Link>
-            </div>
+            {/*
+              <div className="itemsNav">
+                <img src={iconRelatorio} alt="" />
+                <Link to="/Relatório" onClick={closeMenu}>
+                  Relatórios
+                </Link>
+              </div>
+            */}
           </ItemsNav>
         </Navigate>
         <ItemAdm>
